@@ -3,7 +3,7 @@
 Version 1.0.0
 
 OAuth2 strategy for [`omniauth`](http://rubygems.org/gems/omniauth) and
-[Younility](https://www.younility.com/).
+[Younility](http://www.younility.com/).
 
 ## Installation
 
