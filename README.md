@@ -27,13 +27,13 @@ $ gem install omniauth-younility
 
 ## Demo
 
-You can see a demo of usage at [our heroku site](https://web-younility.herokuapp.com/)
+You can see a demo of usage at [our heroku site](https://signatron.herokuapp.com)
 
 ## Usage
 
 The API is currently only in private beta. Usage instructions to follow.
 
-For now, see the source of the demo app at [our github site](http://github.com/YounilityInc/omniauth-younility-example).
+For now, see the source of the demo app at [our github site](https://github.com/YounilityInc/signature_generator).
 
 ### Ruby
 
