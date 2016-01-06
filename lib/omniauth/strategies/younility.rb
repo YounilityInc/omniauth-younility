@@ -33,6 +33,7 @@ module OmniAuth
           'id'                      => raw_info['id'],
           'name'                    => raw_info['name'],
           'email'                   => raw_info['email'],
+          'verified_email'          => raw_info['verified_email'],
           'default_organization_id' => raw_info['default_organization_id'],
           'default_role'            => raw_info['default_role']
         }
