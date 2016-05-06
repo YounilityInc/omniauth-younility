@@ -6,8 +6,14 @@ module OmniAuth
     class Younility < OmniAuth::Strategies::OAuth2
       option :name, "younility"
 
+      if ENV['SITE_URL'].present?
+        url = ENV['SITE_URL']
+      else
+        url = 'https://app.younility.com'
+      end
+
       option :client_options, {
-        site:           'https://app.younility.com',
+        site:           url,
         authorize_url:  '/api/oauth/authorize',
         token_url:      '/api/oauth/token'
       }
