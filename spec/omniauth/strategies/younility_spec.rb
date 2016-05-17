@@ -25,11 +25,11 @@ describe OmniAuth::Strategies::Younility do
     end
 
     it "returns the #authorize_url" do
-      expect(subject.options.client_options.authorize_url).to eq('/api/oauth/authorize')
+      expect(subject.options.client_options.authorize_url).to eq('/oauth/authorize')
     end
 
     it "returns the #token_url" do
-      expect(subject.options.client_options.token_url).to eq('/api/oauth/token')
+      expect(subject.options.client_options.token_url).to eq('/oauth/token')
     end
   end
 
@@ -57,14 +57,14 @@ describe OmniAuth::Strategies::Younility do
 
     context "#raw_info" do
       it "should return user info" do
-        access_token.should_receive(:get).with('/api/v0/whoami').and_return(response)
+        access_token.should_receive(:get).with('/v0/whoami').and_return(response)
         subject.raw_info.should eq(parsed_response)
       end
     end
 
     it "returns the uid" do
       expected = '123'
-      access_token.should_receive(:get).with('/api/v0/whoami').and_return(response)
+      access_token.should_receive(:get).with('/v0/whoami').and_return(response)
       # byebug
       parsed_response.should_receive(:[]).with('id').and_return(the_uid_response)
       expect(subject.uid).to eq(expected)
@@ -89,7 +89,7 @@ describe OmniAuth::Strategies::Younility do
           'default_organization_id' => '987',
           'default_role'            => 'admin'
         }
-        access_token.should_receive(:get).with('/api/v0/whoami').and_return(response)
+        access_token.should_receive(:get).with('/v0/whoami').and_return(response)
         expect(subject.info).to eq(expected)
       end
     end
@@ -139,7 +139,7 @@ describe OmniAuth::Strategies::Younility do
             },
           "extra"=>{}
         }
-        access_token.should_receive(:get).with('/api/v0/whoami').and_return(response)
+        access_token.should_receive(:get).with('/v0/whoami').and_return(response)
         expect(subject.auth_hash.to_hash).to eq(expected)
       end
     end
