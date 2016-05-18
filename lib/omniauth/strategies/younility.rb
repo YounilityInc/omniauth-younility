@@ -12,6 +12,8 @@ module OmniAuth
         token_url:      '/oauth/token'
       }
 
+      option :api_prefix, ""
+
       def authorize_params
         super.tap do |params|
           params[:response_type] = 'code'
@@ -40,7 +42,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/v0/whoami').parsed
+        @raw_info ||= access_token.get(whoami_uri).parsed
       end
 
       def build_access_token
@@ -54,6 +56,9 @@ module OmniAuth
         client.get_token token_params
       end
 
+      def whoami_uri
+        "#{options[:api_prefix]}/v0/whoami"
+      end
     end
   end
 end
