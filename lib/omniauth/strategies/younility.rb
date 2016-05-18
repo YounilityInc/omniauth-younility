@@ -8,8 +8,8 @@ module OmniAuth
 
       option :client_options, {
         site:           'https://app.younility.com',
-        authorize_url:  '/api/oauth/authorize',
-        token_url:      '/api/oauth/token'
+        authorize_url:  '/oauth/authorize',
+        token_url:      '/oauth/token'
       }
 
       def authorize_params
@@ -40,7 +40,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/api/v0/whoami').parsed
+        @raw_info ||= access_token.get('/v0/whoami').parsed
       end
 
       def build_access_token
