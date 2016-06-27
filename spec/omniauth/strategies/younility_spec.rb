@@ -1,6 +1,5 @@
 require 'ostruct'
 require 'spec_helper'
-require 'byebug'
 
 # test process inspired by automatic/omniauth-automatic
 # file should not be considered a complete spec yet
@@ -10,9 +9,11 @@ describe OmniAuth::Strategies::Younility do
   let(:parsed_response) { double('ParsedResponse') }
   let(:response) { double('Response', parsed: parsed_response) }
   let(:app) { lambda { |r| [200, '', ['Yo']] } }
+  let(:app_with_prefix) {[ '', '', { api_prefix: '/api' }]}
   let(:the_uid_response) { '123' }
 
   subject { described_class.new(app) }
+  let(:subject_with_prefix) { described_class.new(*app_with_prefix) }
 
   before(:each) do
     OmniAuth.config.test_mode = true
@@ -32,6 +33,26 @@ describe OmniAuth::Strategies::Younility do
       expect(subject.options.client_options.token_url).to eq('/oauth/token')
     end
   end
+
+  context "api_prefix" do
+    it "must not have a prefix by default" do
+      expect(subject.options.api_prefix).to eq('')
+    end
+    it 'must have a prefix if a prefix is provided in options' do
+      expect(subject_with_prefix.options.api_prefix).to eq('/api')
+    end
+  end
+
+  context 'whoami_uri' do
+    it 'must generate a valid uri without prefix' do
+      expect(subject.whoami_uri).to eq('/v0/whoami')
+    end
+    it 'must generate a valid uri with prefix' do
+      expect(subject_with_prefix.whoami_uri).to eq('/api/v0/whoami')
+    end
+  end
+
+
 
   describe "auth params" do
     let(:response_params) do
@@ -76,6 +97,7 @@ describe OmniAuth::Strategies::Younility do
           "id"                      => "123",
           "name"                    => "Lester Tester",
           "email"                   => "lester@example.com",
+          "verified_email"          => true,
           "default_organization_id" => "987",
           "default_role"            => "admin"
         }
@@ -86,6 +108,7 @@ describe OmniAuth::Strategies::Younility do
           'id'                      => '123',
           'name'                    => 'Lester Tester',
           'email'                   => 'lester@example.com',
+          'verified_email'          => true,
           'default_organization_id' => '987',
           'default_role'            => 'admin'
         }
@@ -104,6 +127,7 @@ describe OmniAuth::Strategies::Younility do
               "id"                      => "123",
               "email"                   => "lester@example.com",
               "name"                    => "Lester Tester",
+              "verified_email"          => true,
               "default_organization_id" => "987",
               "default_role"            => "admin"
             },
@@ -127,6 +151,7 @@ describe OmniAuth::Strategies::Younility do
               "id"                      => nil,
               "email"                   => nil,
               "name"                    => nil,
+              "verified_email"          => nil,
               'default_organization_id' => nil,
               'default_role'            => nil
             },
