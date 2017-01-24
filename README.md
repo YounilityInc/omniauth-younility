@@ -1,6 +1,6 @@
 # Omniauth Younility Strategy
 
-Version 2.0.0
+Version 2.1.0
 
 OAuth2 strategy for [`omniauth`](http://rubygems.org/gems/omniauth) and
 [Younility](http://www.younility.com/).
