@@ -86,7 +86,6 @@ describe OmniAuth::Strategies::Younility do
     it "returns the uid" do
       expected = '123'
       access_token.should_receive(:get).with('/v0/whoami').and_return(response)
-      # byebug
       parsed_response.should_receive(:[]).with('id').and_return(the_uid_response)
       expect(subject.uid).to eq(expected)
     end
@@ -99,7 +98,8 @@ describe OmniAuth::Strategies::Younility do
           "email"                   => "lester@example.com",
           "verified_email"          => true,
           "default_organization_id" => "987",
-          "default_role"            => "admin"
+          "default_role"            => "admin",
+          "organization_owner"      => true
         }
       end
 
@@ -110,7 +110,8 @@ describe OmniAuth::Strategies::Younility do
           'email'                   => 'lester@example.com',
           'verified_email'          => true,
           'default_organization_id' => '987',
-          'default_role'            => 'admin'
+          'default_role'            => 'admin',
+          'organization_owner'      => true
         }
         access_token.should_receive(:get).with('/v0/whoami').and_return(response)
         expect(subject.info).to eq(expected)
@@ -129,7 +130,8 @@ describe OmniAuth::Strategies::Younility do
               "name"                    => "Lester Tester",
               "verified_email"          => true,
               "default_organization_id" => "987",
-              "default_role"            => "admin"
+              "default_role"            => "admin",
+              "organization_owner"      => true
             },
           "credentials"=>
             {
@@ -153,7 +155,8 @@ describe OmniAuth::Strategies::Younility do
               "name"                    => nil,
               "verified_email"          => nil,
               'default_organization_id' => nil,
-              'default_role'            => nil
+              'default_role'            => nil,
+              'organization_owner'      => nil
             },
           "credentials"=>
             {

@@ -37,7 +37,8 @@ module OmniAuth
           'email'                   => raw_info['email'],
           'verified_email'          => raw_info['verified_email'],
           'default_organization_id' => raw_info['default_organization_id'],
-          'default_role'            => raw_info['default_role']
+          'default_role'            => raw_info['default_role'],
+          'organization_owner'      => raw_info['organization_owner']
         }
       end
 
